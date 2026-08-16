@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+my_prod_key.md
+scratch/
 
 # debug
 npm-debug.log*
@@ -30,8 +32,16 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Environment files with secrets (NEVER COMMIT SENSITIVE KEYS TO GIT)
+.env
+.env.local
+.env.production
+.env.development
+.env*.local
+
+# Allow committing safe environment template files
+!.env.production.example
+!.env.example
 
 # vercel
 .vercel
