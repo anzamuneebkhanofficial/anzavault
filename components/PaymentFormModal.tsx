@@ -123,24 +123,24 @@ export default function PaymentFormModal({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in cursor-pointer overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in cursor-pointer overflow-y-auto"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg max-h-[85vh] sm:max-h-[90vh] my-auto overflow-y-auto rounded-3xl border border-slate-800 bg-[#0F172A] p-5 sm:p-8 shadow-2xl space-y-5 cursor-default scrollbar-thin scrollbar-thumb-slate-800"
+        className="relative w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl max-h-[90vh] my-auto overflow-y-auto rounded-3xl border border-slate-800 bg-[#0F172A] p-5 sm:p-7 md:p-8 shadow-2xl space-y-6 cursor-default scrollbar-thin scrollbar-thumb-slate-800"
       >
         
         {/* Sticky Header */}
-        <div className="flex items-center justify-between sticky top-0 bg-[#0F172A]/90 backdrop-blur-md pb-2 z-10 border-b border-slate-800/80">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between sticky top-0 bg-[#0F172A]/95 backdrop-blur-md pb-3 z-10 border-b border-slate-800/80">
+          <div className="flex items-center gap-3.5">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shrink-0">
               <CreditCard className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-100">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-100">
                 {initialData ? 'Edit Payment Account' : 'Add Payment Account'}
               </h3>
-              <p className="text-xs text-slate-400">Instant One-Click Copy & WhatsApp Quick-Share</p>
+              <p className="text-xs text-slate-400">Instant One-Click Copy & WhatsApp Quick-Share Ready</p>
             </div>
           </div>
 
@@ -153,29 +153,29 @@ export default function PaymentFormModal({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-5">
           
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <label className="text-xs font-semibold text-slate-300">Payment Provider *</label>
             <ProviderSelect value={provider} onChange={(val) => setProvider(val as PaymentProvider)} />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-300">Account Title *</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="space-y-1.5 sm:col-span-2">
+              <label className="text-xs font-medium text-slate-300">Account Title *</label>
               <input
                 type="text"
                 {...register('accountTitle')}
                 placeholder="e.g. Anza Muneeb Khan"
-                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-300">Currency</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-slate-300">Currency</label>
               <select
                 {...register('currency')}
-                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-100 focus:border-cyan-500 focus:outline-none"
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 focus:border-cyan-500 focus:outline-none"
               >
                 <option value="PKR">PKR (Pakistani Rupee)</option>
                 <option value="USD">USD (US Dollar)</option>
@@ -187,82 +187,84 @@ export default function PaymentFormModal({
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Account Number / IBAN / Wallet ID *</label>
-            <input
-              type="text"
-              {...register('accountNumber')}
-              placeholder="e.g. 03001234567 or PK36MEZN00..."
-              className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs font-mono text-cyan-300 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-300">Bank Name (Optional)</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="space-y-1.5 sm:col-span-2">
+              <label className="text-xs font-medium text-slate-300">Account Number / IBAN / Wallet ID *</label>
               <input
                 type="text"
-                {...register('bankName')}
-                placeholder="e.g. Meezan Bank Limited"
-                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+                {...register('accountNumber')}
+                placeholder="e.g. 03001234567 or PK36MEZN00..."
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-mono text-cyan-300 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-300">Linked CNIC (Optional)</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-slate-300">Linked CNIC (Optional)</label>
               <input
                 type="text"
                 {...register('linkedCnic')}
                 placeholder="e.g. 42101-1234567-9"
-                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs font-mono text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-mono text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Wallet Tier / Account Level (Optional)</label>
-            <input
-              type="text"
-              {...register('walletTier')}
-              placeholder="e.g. Basic Tier 1 / Biometric KYC Level 2"
-              className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-slate-300">Bank Name (Optional)</label>
+              <input
+                type="text"
+                {...register('bankName')}
+                placeholder="e.g. Meezan Bank Limited"
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-slate-300">Wallet Tier / Level (Optional)</label>
+              <input
+                type="text"
+                {...register('walletTier')}
+                placeholder="e.g. Basic Tier 1 / Biometric KYC Level 2"
+                className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+              />
+            </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Notes (Optional)</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-slate-300">Notes (Optional)</label>
             <textarea
               rows={2}
               {...register('notes')}
               placeholder="e.g. Primary salary account / JazzCash merchant..."
-              className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-500 focus:outline-none resize-none"
             />
           </div>
 
-          <div className="flex items-center gap-2 pt-1">
+          <div className="flex items-center gap-2.5 pt-1">
             <input
               type="checkbox"
               id="isPinned"
               {...register('isPinned')}
               className="h-4 w-4 rounded border-slate-800 bg-slate-950 text-cyan-500 focus:ring-cyan-500 cursor-pointer"
             />
-            <label htmlFor="isPinned" className="text-xs font-medium text-slate-300 cursor-pointer">
+            <label htmlFor="isPinned" className="text-xs sm:text-sm font-medium text-slate-300 cursor-pointer">
               ⭐ Pin to Top Favorites (Quick-Share Bar)
             </label>
           </div>
 
-          <div className="mt-6 flex justify-end gap-3 pt-3 border-t border-slate-800">
+          <div className="mt-8 flex justify-end gap-3 pt-4 border-t border-slate-800">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+              className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-xs font-semibold text-white rounded-xl shadow-lg shadow-cyan-900/20 transition-all cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-xs sm:text-sm font-semibold text-white rounded-xl shadow-lg shadow-cyan-900/30 transition-all cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 'Saving Account...'

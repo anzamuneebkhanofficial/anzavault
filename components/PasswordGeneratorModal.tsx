@@ -140,22 +140,22 @@ export default function PasswordGeneratorModal({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 cursor-pointer overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 cursor-pointer overflow-y-auto"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg max-h-[85vh] sm:max-h-[90vh] my-auto overflow-y-auto rounded-3xl border border-slate-800 bg-[#0F172A] p-5 sm:p-6 shadow-2xl space-y-5 cursor-default scrollbar-thin scrollbar-thumb-slate-800"
+        className="relative w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl max-h-[90vh] my-auto overflow-y-auto rounded-3xl border border-slate-800 bg-[#0F172A] p-5 sm:p-7 md:p-8 shadow-2xl space-y-6 cursor-default scrollbar-thin scrollbar-thumb-slate-800"
       >
         
         {/* Sticky Header */}
-        <div className="flex items-center justify-between sticky top-0 bg-[#0F172A]/90 backdrop-blur-md pb-2 z-10 border-b border-slate-800/80">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0">
-              <KeyRound className="h-5 w-5" />
+        <div className="flex items-center justify-between sticky top-0 bg-[#0F172A]/95 backdrop-blur-md pb-3 z-10 border-b border-slate-800/80">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0">
+              <KeyRound className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-100 text-lg">Password Generator</h3>
-              <p className="text-xs text-slate-400">High-entropy cryptographic random password engine</p>
+              <h3 className="font-extrabold text-slate-100 text-xl sm:text-2xl">Password Generator</h3>
+              <p className="text-xs text-slate-400">High-entropy cryptographic random password & passphrase engine</p>
             </div>
           </div>
 
@@ -169,147 +169,148 @@ export default function PasswordGeneratorModal({
         </div>
 
         {/* Display Banner */}
-        <div className="relative rounded-2xl border border-emerald-500/30 bg-slate-950 p-4 space-y-3">
+        <div className="relative rounded-2xl border border-emerald-500/30 bg-slate-950 p-5 sm:p-6 space-y-3 shadow-inner">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
               Generated Result
             </span>
 
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border ${
               strengthInfo.color === 'emerald' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
               strengthInfo.color === 'cyan' ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' :
               strengthInfo.color === 'amber' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
               'bg-red-500/10 text-red-400 border-red-500/20'
             }`}>
-              {strengthInfo.label} ({Math.round(strengthInfo.score)} bits)
+              {strengthInfo.label} ({Math.round(strengthInfo.score)} bits entropy)
             </span>
           </div>
 
-          <div className="flex items-center justify-between gap-3">
-            <span className="font-mono text-lg font-bold text-emerald-300 break-all select-all">
+          <div className="flex items-center justify-between gap-4 pt-1">
+            <span className="font-mono text-xl sm:text-2xl md:text-3xl font-extrabold text-emerald-300 break-all select-all tracking-wider">
               {generatedPassword}
             </span>
 
             <button
               onClick={() => setSeed((s) => s + 1)}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors shrink-0 cursor-pointer"
-              title="Regenerate"
+              className="p-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors shrink-0 cursor-pointer shadow-md hover:text-emerald-400"
+              title="Regenerate Password"
             >
-              <RefreshCw className="h-4 w-4" />
+              <RefreshCw className="h-5 w-5" />
             </button>
           </div>
         </div>
 
         {/* Mode Switcher */}
-        <div className="flex rounded-xl bg-slate-900 p-1 border border-slate-800">
+        <div className="flex rounded-2xl bg-slate-900/90 p-1.5 border border-slate-800">
           <button
             type="button"
             onClick={() => setValue('isPassphrase', false)}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-              !isPassphrase ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'
+            className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              !isPassphrase ? 'bg-emerald-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            Random Characters
+            Random Characters Mode
           </button>
           <button
             type="button"
             onClick={() => setValue('isPassphrase', true)}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-              isPassphrase ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'
+            className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              isPassphrase ? 'bg-emerald-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            Word Passphrase
+            Memorable Word Passphrase
           </button>
         </div>
 
         {/* Controls Form */}
-        <form className="space-y-4">
+        <form className="space-y-5">
           {!isPassphrase ? (
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-xs font-medium text-slate-300 mb-1.5">
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs sm:text-sm font-medium text-slate-300">
                   <span>Password Length</span>
-                  <span className="font-mono text-emerald-400 font-bold">{length} characters</span>
+                  <span className="font-mono text-emerald-400 font-extrabold text-sm sm:text-base">{length} characters</span>
                 </div>
                 <input
                   type="range"
                   min="8"
                   max="64"
                   {...register('length', { valueAsNumber: true })}
-                  className="w-full accent-emerald-500 cursor-pointer"
+                  className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-800 rounded-lg"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs font-medium text-slate-300">
-                <label className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 cursor-pointer">
+              {/* 4 Checkboxes in 4 Columns on Desktop */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm font-medium text-slate-300">
+                <label className="flex items-center gap-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 p-3 hover:border-slate-700 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     {...register('useUpper')}
-                    className="rounded accent-emerald-500"
+                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
                   />
                   <span>Uppercase (A-Z)</span>
                 </label>
 
-                <label className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 cursor-pointer">
+                <label className="flex items-center gap-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 p-3 hover:border-slate-700 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     {...register('useLower')}
-                    className="rounded accent-emerald-500"
+                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
                   />
                   <span>Lowercase (a-z)</span>
                 </label>
 
-                <label className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 cursor-pointer">
+                <label className="flex items-center gap-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 p-3 hover:border-slate-700 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     {...register('useNumbers')}
-                    className="rounded accent-emerald-500"
+                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
                   />
                   <span>Numbers (0-9)</span>
                 </label>
 
-                <label className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 cursor-pointer">
+                <label className="flex items-center gap-2.5 rounded-2xl border border-slate-800 bg-slate-950/80 p-3 hover:border-slate-700 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     {...register('useSymbols')}
-                    className="rounded accent-emerald-500"
+                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
                   />
                   <span>Symbols (!@#$)</span>
                 </label>
               </div>
             </div>
           ) : (
-            <div>
-              <div className="flex justify-between text-xs font-medium text-slate-300 mb-1.5">
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs sm:text-sm font-medium text-slate-300">
                 <span>Word Count</span>
-                <span className="font-mono text-emerald-400 font-bold">{wordCount} words</span>
+                <span className="font-mono text-emerald-400 font-extrabold text-sm sm:text-base">{wordCount} words</span>
               </div>
               <input
                 type="range"
                 min="3"
                 max="8"
                 {...register('wordCount', { valueAsNumber: true })}
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-800 rounded-lg"
               />
             </div>
           )}
         </form>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
+        <div className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-800">
           <button
             type="button"
             onClick={handleCopy}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
           >
-            {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-slate-300 shadow-sm" />}
-            <span>{copied ? 'Copied!' : 'Copy Password'}</span>
+            {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-slate-300" />}
+            <span>{copied ? 'Copied to Clipboard!' : 'Copy Password'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleUsePassword}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-lg shadow-emerald-950/40 transition-all cursor-pointer"
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-emerald-950/40 transition-all cursor-pointer"
           >
             <ShieldCheck className="h-4 w-4" />
             <span>Use Password</span>
