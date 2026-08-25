@@ -20,7 +20,7 @@ export interface TokenPayload {
  * Creates Access Token (~15 mins) - Edge safe
  */
 export async function createAccessToken(payload: TokenPayload): Promise<string> {
-  const expiresIn = process.env.JWT_ACCESS_EXPIRES_IN || '15m';
+  const expiresIn = process.env.JWT_ACCESS_EXPIRES_IN || '6h';
   return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { Lock, KeyRound, AlertTriangle, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { Lock, KeyRound, AlertTriangle, ArrowRight, ShieldCheck, RefreshCw, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface LoginFormValues {
@@ -15,6 +15,7 @@ interface LoginFormValues {
 export default function LoginPage() {
   const router = useRouter();
   const [requiresTotp, setRequiresTotp] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [isBlocked, setIsBlocked] = useState(false);
@@ -166,14 +167,22 @@ export default function LoginPage() {
                     <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                       Master Vault Password
                     </label>
-                    <div className="relative">
+                    <div className="relative flex items-center">
                       <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         required
                         {...register('password')}
                         placeholder="••••••••••••••••"
-                        className="w-full rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none transition-colors"
+                        className="w-full rounded-xl border border-slate-800 bg-slate-950 pl-4 pr-11 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-emerald-500 focus:outline-none transition-colors"
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3.5 text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-1"
+                        title={showPassword ? 'Hide password' : 'Show password'}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4 text-emerald-400" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
                   </div>
                 </>

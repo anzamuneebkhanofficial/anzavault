@@ -14,7 +14,9 @@ import {
   AlertCircle, 
   RefreshCw, 
   Filter, 
-  Layers 
+  Layers,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -31,11 +33,13 @@ export default function ExportImportPage() {
   const [exportCategory, setExportCategory] = useState<string>('all');
   const [exportFormat, setExportFormat] = useState<string>('swiz');
   const [isExporting, setIsExporting] = useState(false);
+  const [showExportPassphrase, setShowExportPassphrase] = useState(false);
 
   // Import State
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importStrategy, setImportStrategy] = useState<'skip' | 'overwrite'>('skip');
   const [isImporting, setIsImporting] = useState(false);
+  const [showImportPassphrase, setShowImportPassphrase] = useState(false);
   const [importStatus, setImportStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const exportForm = useForm<ExportFormValues>({
@@ -224,12 +228,22 @@ export default function ExportImportPage() {
                     <Lock className="h-3.5 w-3.5 text-emerald-400" />
                     Backup Passphrase (For .swiz encryption)
                   </label>
-                  <input
-                    type="password"
-                    {...exportForm.register('exportPassphrase')}
-                    placeholder="Enter custom passphrase..."
-                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-100 focus:border-emerald-500 focus:outline-none"
-                  />
+                  <div className="relative flex items-center">
+                    <input
+                      type={showExportPassphrase ? 'text' : 'password'}
+                      {...exportForm.register('exportPassphrase')}
+                      placeholder="Enter custom passphrase..."
+                      className="w-full rounded-xl border border-slate-800 bg-slate-900 pl-3 pr-9 py-2 text-xs text-slate-100 focus:border-emerald-500 focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowExportPassphrase(!showExportPassphrase)}
+                      className="absolute right-2.5 text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-0.5"
+                      title={showExportPassphrase ? 'Hide passphrase' : 'Show passphrase'}
+                    >
+                      {showExportPassphrase ? <EyeOff className="h-3.5 w-3.5 text-emerald-400" /> : <Eye className="h-3.5 w-3.5" />}
+                    </button>
+                  </div>
                   <p className="text-[10px] text-slate-500">
                     This passphrase will be required when restoring this `.swiz` backup file in the future.
                   </p>
@@ -300,12 +314,22 @@ export default function ExportImportPage() {
                     <Lock className="h-3.5 w-3.5 text-cyan-400" />
                     Decryption Passphrase
                   </label>
-                  <input
-                    type="password"
-                    {...importForm.register('importPassphrase')}
-                    placeholder="Enter backup passphrase..."
-                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-100 focus:border-cyan-500 focus:outline-none"
-                  />
+                  <div className="relative flex items-center">
+                    <input
+                      type={showImportPassphrase ? 'text' : 'password'}
+                      {...importForm.register('importPassphrase')}
+                      placeholder="Enter backup passphrase..."
+                      className="w-full rounded-xl border border-slate-800 bg-slate-900 pl-3 pr-9 py-2 text-xs text-slate-100 focus:border-cyan-500 focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowImportPassphrase(!showImportPassphrase)}
+                      className="absolute right-2.5 text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer p-0.5"
+                      title={showImportPassphrase ? 'Hide passphrase' : 'Show passphrase'}
+                    >
+                      {showImportPassphrase ? <EyeOff className="h-3.5 w-3.5 text-cyan-400" /> : <Eye className="h-3.5 w-3.5" />}
+                    </button>
+                  </div>
                 </div>
               )}
 

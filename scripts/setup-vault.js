@@ -77,7 +77,7 @@ TOTP_SECRET="${totpSecret}"
 
 # Security & Session Settings
 MAX_LOGIN_ATTEMPTS="2"
-SESSION_IDLE_TIMEOUT_MINUTES="15"
+SESSION_IDLE_TIMEOUT_MINUTES="360"
 
 # Database & Infrastructure
 MONGODB_URI="mongodb://localhost:27017/anza-vault"

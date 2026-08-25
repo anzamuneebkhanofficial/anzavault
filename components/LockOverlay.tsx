@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Lock, KeyRound, ShieldCheck, X } from 'lucide-react';
+import { Lock, KeyRound, ShieldCheck, X, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface LockOverlayProps {
@@ -16,6 +16,7 @@ interface FormValues {
 
 export default function LockOverlay({ isLocked, onUnlock }: LockOverlayProps) {
   const [error, setError] = useState(false);
+  const [showPasscode, setShowPasscode] = useState(false);
   const { register, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: { passcode: '' },
   });
@@ -64,15 +65,23 @@ export default function LockOverlay({ isLocked, onUnlock }: LockOverlayProps) {
         </div>
 
         <form onSubmit={handleSubmit(handleUnlockAttempt)} className="space-y-4">
-          <div className="relative">
-            <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+          <div className="relative flex items-center">
+            <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
             <input
-              type="password"
+              type={showPasscode ? 'text' : 'password'}
               {...register('passcode')}
               placeholder="Enter Passcode (anza123)..."
-              className="w-full rounded-xl border border-slate-800 bg-slate-950 pl-10 pr-4 py-3 text-center text-sm font-bold text-slate-100 tracking-widest placeholder-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-800 bg-slate-950 pl-10 pr-11 py-3 text-center text-sm font-bold text-slate-100 tracking-widest placeholder-slate-600 focus:border-emerald-500 focus:outline-none"
               autoFocus
             />
+            <button
+              type="button"
+              onClick={() => setShowPasscode(!showPasscode)}
+              className="absolute right-3.5 text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-1"
+              title={showPasscode ? 'Hide passcode' : 'Show passcode'}
+            >
+              {showPasscode ? <EyeOff className="h-4 w-4 text-emerald-400" /> : <Eye className="h-4 w-4" />}
+            </button>
           </div>
 
           {error && <p className="text-xs text-red-400">Please enter at least 4 characters to unlock.</p>}

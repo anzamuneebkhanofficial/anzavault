@@ -50,8 +50,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Security breach detected: invalid refresh token reuse' }, { status: 401 });
   }
 
-  // Check Session Idle Timeout (default 15 minutes)
-  const idleTimeoutMinutes = parseInt(process.env.SESSION_IDLE_TIMEOUT_MINUTES || '15', 10);
+  // Check Session Idle Timeout (default 360 minutes / 6 hours)
+  const idleTimeoutMinutes = parseInt(process.env.SESSION_IDLE_TIMEOUT_MINUTES || '360', 10);
   const idleDiff = (Date.now() - new Date(session.lastActivity).getTime()) / (1000 * 60);
 
   if (idleDiff > idleTimeoutMinutes) {

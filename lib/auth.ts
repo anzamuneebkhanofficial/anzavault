@@ -99,7 +99,7 @@ export function verifyOwnerEmail(email: string): boolean {
  * Creates Access Token (~15 mins)
  */
 export async function createAccessToken(payload: TokenPayload): Promise<string> {
-  const expiresIn = process.env.JWT_ACCESS_EXPIRES_IN || '15m';
+  const expiresIn = process.env.JWT_ACCESS_EXPIRES_IN || '6h';
   return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -163,7 +163,7 @@ export async function setAuthCookies(accessToken: string, refreshToken: string) 
     secure,
     sameSite,
     path: '/',
-    maxAge: 15 * 60, // 15 minutes
+    maxAge: 6 * 60 * 60, // 6 hours
   });
 
   cookieStore.set(REFRESH_TOKEN_COOKIE, refreshToken, {

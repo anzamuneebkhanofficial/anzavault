@@ -114,6 +114,7 @@ export default function VaultFormModal({
   const [category, setCategory] = useState<VaultCategory>('banking');
   const [showPassword, setShowPassword] = useState(false);
   const [showCardDetails, setShowCardDetails] = useState(false);
+  const [showAtmPin, setShowAtmPin] = useState(false);
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -256,6 +257,7 @@ export default function VaultFormModal({
     }
     setShowPassword(false);
     setShowCardDetails(false);
+    setShowAtmPin(false);
   }, [initialData, isOpen, reset]);
 
   if (!isOpen) return null;
@@ -589,12 +591,22 @@ export default function VaultFormModal({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="text-[11px] font-medium text-slate-300">ATM / Card Secret PIN (Optional)</label>
-                    <input
-                      type="password"
-                      {...register('atmPin')}
-                      placeholder="e.g. 8912"
-                      className="w-full rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-mono text-amber-300 focus:border-emerald-500 focus:outline-none"
-                    />
+                    <div className="relative flex items-center">
+                      <input
+                        type={showAtmPin ? 'text' : 'password'}
+                        {...register('atmPin')}
+                        placeholder="e.g. 8912"
+                        className="w-full rounded-xl border border-slate-800 bg-slate-900 pl-3 pr-9 py-2 text-xs font-mono text-amber-300 focus:border-emerald-500 focus:outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowAtmPin(!showAtmPin)}
+                        className="absolute right-2.5 text-slate-400 hover:text-amber-400 transition-colors cursor-pointer p-0.5"
+                        title={showAtmPin ? 'Hide ATM PIN' : 'Show ATM PIN'}
+                      >
+                        {showAtmPin ? <EyeOff className="h-3.5 w-3.5 text-amber-400" /> : <Eye className="h-3.5 w-3.5" />}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="space-y-1">
