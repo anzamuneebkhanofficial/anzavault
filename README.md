@@ -96,7 +96,7 @@ Create a `.env.local` file in the root directory by copying the `.env.example` f
 
 ```env
 # Mandatory Settings
-APP_NAME="ShareApp Vault (Local)"
+APP_NAME="AnzaVault (Local)"
 NODE_ENV="development"
 OWNER_EMAIL="demo@example.com"
 ADMIN_PASSWORD="your_secure_password"

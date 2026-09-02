@@ -5,7 +5,7 @@ import { verifyAccessToken } from '@/lib/jwt';
 const PROTECTED_ROUTES = ['/dashboard', '/vault', '/payment', '/audit'];
 const PUBLIC_AUTH_ROUTES = ['/login'];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = NextResponse.next();
 
