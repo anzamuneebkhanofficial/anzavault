@@ -40,7 +40,6 @@ yarn-error.log*
 .env*.local
 
 # Allow committing safe environment template files
-!.env.production.example
 !.env.example
 
 # vercel
