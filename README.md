@@ -92,18 +92,18 @@ npm install
 ```
 
 ### 2. Configure Local Environment Variables
-Create a `.env.local` file in the root directory:
+Create a `.env.local` file in the root directory by copying the `.env.example` file:
 
 ```env
 # Mandatory Settings
-APP_NAME="AnzaVault (Local)"
+APP_NAME="ShareApp Vault (Local)"
 NODE_ENV="development"
-OWNER_EMAIL="anza@example.com"
-ADMIN_PASSWORD="anza123"
-ENCRYPTION_KEY="778fda24ceea6d59684ee02fa0522c7ec88268d6030eb7616b4d7ca965fa5b03"
-JWT_ACCESS_SECRET="40755f3cf3a9046d0611f65c8e5d0c8e6f4bf29d2ad8dbb14f7cd5e4300b5289"
-JWT_REFRESH_SECRET="e7e91ffba66d6bd45b418c0a0a9ce629a7f7349cd97f1d3f6aeb5c0d0b625402"
-MONGODB_URI="mongodb://localhost:27017/anza-vault"
+OWNER_EMAIL="demo@example.com"
+ADMIN_PASSWORD="your_secure_password"
+ENCRYPTION_KEY="your_64_character_hex_encryption_key_here"
+JWT_ACCESS_SECRET="your_jwt_access_secret_here"
+JWT_REFRESH_SECRET="your_jwt_refresh_secret_here"
+MONGODB_URI="mongodb://localhost:27017/your-database"
 
 # Optional Settings (Set TOTP_SECRET="" for 1-step local login)
 TOTP_SECRET=""
@@ -121,7 +121,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. Log in usin
 
 ## 🌐 Production Deployment Guide
 
-When deploying to **Vercel**, **Railway**, **Render**, or a **VPS**, configure your environment variables using `.env.production.example`:
+When deploying to **Vercel**, **Railway**, **Render**, or a **VPS**, configure your environment variables using `.env.example` as a reference:
 
 1. **Set `NODE_ENV`**: `"production"`
 2. **Set `MONGODB_URI`**: Your MongoDB Atlas Connection String
